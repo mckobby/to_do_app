@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import '../components/dialog_box.dart';
 import '../components/to_do_tile.dart';
 
@@ -29,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   // Save new tassk
   void saveNewTask() {
     setState(() {
-      toDoList.add([_controller.text, false]);
+      if (_controller.text.isNotEmpty) {
+        toDoList.add([_controller.text, false]);
+      }
       _controller.clear();
     });
     Navigator.of(context).pop();
@@ -49,6 +52,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Delete a task
+  void deleteTask(int index) {
+    setState(() {
+      toDoList.removeAt(index);
+    });
+  }
+
+  // Share app function
+  void sharePressed() {
+    String message =
+        'Check out this new app, ToDo, that assists you in organizing your daily tasks.'
+        ' Contact developer: rapcedy@gmail.com';
+    Share.share(message);
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -60,15 +78,20 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
-              child: const Text(
-                'TO DO',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                ),
+            const Text(
+              'TO DO',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
               ),
             ),
-            const Icon(Icons.share)
+            GestureDetector(
+              onTap: () {
+                sharePressed();
+              },
+              child: const Icon(
+                Icons.share,
+              ),
+            )
           ],
         ),
         centerTitle: true,
@@ -88,13 +111,14 @@ class _HomePageState extends State<HomePage> {
                   taskName: toDoList[index][0],
                   taskCompleted: toDoList[index][1],
                   onChanged: (value) => checkboxChanged(value, index),
+                  deleteFunction: (context) => deleteTask(index),
                 );
               },
             ),
           ),
           SizedBox(
             height: height * 0.02,
-          )
+          ),
         ],
       ),
     );
