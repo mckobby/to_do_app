@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
           ),
           if (db.toDoList.isNotEmpty)
           Text(
-            'Slide left to delete',
+            'Swipe left to delete',
             style: TextStyle(
               color: Colors.cyan[900]
             ),
