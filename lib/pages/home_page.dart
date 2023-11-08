@@ -133,7 +133,16 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(
-            height: height * 0.02,
+            height: height * 0.005,
+          ),
+          Text(
+            'Slide left to delete',
+            style: TextStyle(
+              color: Colors.cyan[900]
+            ),
+          ),
+          SizedBox(
+            height: height * 0.005,
           ),
         ],
       ),
