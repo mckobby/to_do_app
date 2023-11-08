@@ -135,6 +135,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: height * 0.005,
           ),
+          if (db.toDoList.isNotEmpty)
           Text(
             'Slide left to delete',
             style: TextStyle(
