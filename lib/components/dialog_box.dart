@@ -32,6 +32,7 @@ class DialogBox extends StatelessWidget {
                 border: OutlineInputBorder(),
                 hintText: 'Add a new task',
               ),
+              textCapitalization: TextCapitalization.sentences,
             ),
             // Buttons => save + cancel
             Row(
